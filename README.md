@@ -3,21 +3,22 @@ A simple Spring Boot web application to provide REST user services which runs on
 
 Provided REST services:
 
-- create new user with contact data: /createUser
-- return user by id: /createUser
-- return user by name: /findUserByName
-- add additional mail/phone data: addContactInfo
-- update existing mail/phone data: updateContactInfo
-- delete user: /deleteUser
+- create new user with contact data: /user-controller/createUser
+- return user by id: /user-controller/createUser
+- return user by name: /user-controller/findUserByName
+- add additional mail/phone data: /user-controller/addContactInfo
+- update existing mail/phone data: /user-controller/updateContactInfo
+- delete user: /user-controller/deleteUser
 
 --------------------------------------------------------
 
 Following tools and libraries are used to develop and test the application:
-- Docker 
+- Spring Boot 
 - Java 8 
-- Spring Boot
 - Maven
+- Docker
 - H2 Database
+- Swagger
 
 ---------------------------------------------------------
 How to run:

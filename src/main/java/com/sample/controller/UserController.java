@@ -22,7 +22,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * This controller provides rest services to create, find, delete a user 
+ * This controller provides REST services to create, find, delete a user 
  * and also add and update user's contact info.
  *
  * @author Mahnaz
@@ -38,9 +38,9 @@ public class UserController {
 	private UserService userService;
 
 	/**
-	 * Creates a new user with contact info
-	 * @param createUserRequest {@link UserDto} request to create a new user
-	 * @return ResponseEntity<UserDto> information of the created user 
+	 * Creates a new user with the contact info
+	 * @param createUserRequest - {@link UserDto} request of creating a new user
+	 * @return UserDto - information of the created user 
 	 */
 	@PostMapping(value = "/createUser")
 	@ApiOperation(value = "Create new user", response = UserDto.class)
@@ -50,8 +50,8 @@ public class UserController {
 
 	/**
 	 * Finds the user by the id
-	 * @param userId id of the user
-	 * @return ResponseEntity<UserDto> information of the found user
+	 * @param userId - id of the user
+	 * @return UserDto - information of the found user
 	 */
 	@GetMapping(value = "/findUserById")
 	@ApiOperation(value = "Find user by ID", response = UserDto.class)
@@ -61,8 +61,8 @@ public class UserController {
 
 	/**
 	 * Finds the user by the name
-	 * @param userName first name or last name of the user
-	 * @return ResponseEntity<UserDto> information of the found user
+	 * @param userName - first name or last name of the user
+	 * @return UserDto - information of the found user
 	 */
 	@GetMapping(value = "/findUserByName")
 	@ApiOperation(value = "Find user by name", response = UserDto.class)
@@ -72,8 +72,8 @@ public class UserController {
 
 	/**
 	 * Deletes the user by the id
-	 * @param userId id of the user
-	 * @return ResponseEntity<Long> response status code
+	 * @param userId - id of the user
+	 * @return Long - response status code
 	 */
 	@DeleteMapping(value = "/deleteUser")
 	@ApiOperation(value = "Delete user")
@@ -84,8 +84,8 @@ public class UserController {
 
 	/**
 	 * Adds new phone number and email address to the user's contact info
-	 * @param contactInfoRequest {@link ContactInfoRequest} request of new contact info
-	 * @return ResponseEntity<UserDto> information of updated user
+	 * @param contactInfoRequest - {@link ContactInfoRequest} request of new contact info
+	 * @return UserDto - information of updated user
 	 */
 	@PostMapping(value = "/addContactInfo")
 	@ApiOperation(value = "Add contact info for a user", response = UserDto.class)
@@ -95,8 +95,8 @@ public class UserController {
 
 	/**
 	 * Updates existing phone number or email address of the user
-	 * @param contactInfoRequest {@link ContactInfoRequest} request of updating contact info
-	 * @return ResponseEntity<UserDto> information of updated user
+	 * @param contactInfoRequest - {@link ContactInfoRequest} request of updating contact info
+	 * @return UserDto information of updated user
 	 */
 	@PutMapping(value = "/updateContactInfo")
 	@ApiOperation(value = "Update contact info of a user", response = UserDto.class)

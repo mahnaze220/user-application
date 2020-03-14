@@ -17,12 +17,12 @@ FROM openjdk:8-jdk-alpine
 # ----------------------------------------------------------
 
 # Refer to Maven build -> finalName
-ARG JAR_FILE=target/user-application-1.0.jar
+ARG JAR_FILE=/build/target/user-application-1.0.jar
 
 # cd /opt/app
 WORKDIR /opt/app
 
-# cp target/user-application-1.0.jar /opt/app/app.jar
+# cp /build/target/user-application-1.0.jar /opt/app/app.jar
 COPY ${JAR_FILE} app.jar
 
 # java -jar /opt/app/app.jar
