@@ -10,10 +10,10 @@
 		<relativePath />
 	</parent>
 	<groupId>com.sample</groupId>
-	<artifactId>user-service</artifactId>
+	<artifactId>user-application</artifactId>
 	<version>1.0</version>
-	<name>user-service</name>
-	<description>User Service</description>
+	<name>user-application</name>
+	<description>User Application</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -99,12 +99,10 @@
 						</goals>
 					</execution>
 				</executions>
-
 				<configuration>
-					<excludes>
-						<exclude>com.sample.repository.*</exclude>
-					</excludes>
-
+					<includes>
+						<include>*Test.java</include>
+					</includes>
 				</configuration>
 			</plugin>
 
