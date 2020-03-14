@@ -11,23 +11,19 @@
 #
 # Pull base image
 # ---------------
-FROM maven:3.5.2-jdk-8-alpine AS MAVEN_BUILD
+FROM openjdk:8-jdk-alpine
 
-# Application Configuration
+# Configuration
 # ----------------------------------------------------------
 
-COPY pom.xml /build/
-COPY src /build/src/
+# Refer to Maven build -> finalName
+ARG JAR_FILE=target/user-application-1.0.jar
 
-WORKDIR /build/
+# cd /opt/app
+WORKDIR /opt/app
 
-RUN mvn package clean install
+# cp target/user-application-1.0.jar /opt/app/app.jar
+COPY ${JAR_FILE} app.jar
 
-FROM openjdk:8-jre-alpine
-
-WORKDIR /app
-
-COPY --from=MAVEN_BUILD /build/target/user-application-1.0.jar /app/
-
-ENTRYPOINT ["java", "-jar", "user-application-1.0.jar"]
-
+# java -jar /opt/app/app.jar
+ENTRYPOINT ["java","-jar","app.jar"]
