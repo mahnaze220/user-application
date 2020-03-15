@@ -16,7 +16,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 /**
- * This entity contains user information. 
+ * This entity holds persisted user information. 
  *
  * @author Mahnaz
  * @Mar 13, 2020

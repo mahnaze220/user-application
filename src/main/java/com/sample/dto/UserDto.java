@@ -11,10 +11,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 
 /**
- * This DTO contains user information to add new one.
+ * This DTO contains user information to add new or update existing one.
  *
  * @author Mahnaz
  * @Mar 13, 2020
@@ -22,23 +21,22 @@ import lombok.ToString;
 
 @Data
 @RequiredArgsConstructor
-@ToString(exclude = "emails")
 public class UserDto {
 
 	@JsonProperty("id")
 	@ApiModelProperty(notes = "id")
 	private Integer id;
 	
-	@NotNull
+	@NotNull(message = "Last name must not be null")
 	@JsonProperty("lastName")
-	@ApiModelProperty(notes = "lastName")
+	@ApiModelProperty(notes = "lastName", required = true)
 	@Pattern(regexp = "\\D+", message = "Invalid last name!")
 	@Valid
 	private String lastName;
 	
-	@NotNull
+	@NotNull(message = "First name must not be null")
 	@JsonProperty("firstName")
-	@ApiModelProperty(notes = "firstName")
+	@ApiModelProperty(notes = "firstName", required = true)
 	@Pattern(regexp = "\\D+", message = "Invalid first name!")
 	@Valid
 	private String firstName;

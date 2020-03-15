@@ -94,12 +94,12 @@ public class UserControllerTest {
 	public void deleteUser_whenUserNotExist_thenThrowUserNotFoundException() throws Exception {
 		UserDto userDto = createMockUserDto();
 		Mockito.when(userService.deleteUser(Mockito.any()))
-		.thenThrow(new DuplicateUserException("User not found"));
+		.thenThrow(new UserNotFoundException("User not found"));
 
 		MvcResult result = mockMvc.perform(delete("/deleteUser?userId=1")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(userDto)))
-				.andExpect(status().isBadRequest())
+				.andExpect(status().isNotFound())
 				.andReturn();
 		Exception exception = result.getResolvedException();
 		Assertions.assertTrue(exception.getMessage().equals("User not found"));
@@ -125,7 +125,7 @@ public class UserControllerTest {
 	public void createUser_whenUserIsDuplicate_thenThrowDuplicateUserException() throws Exception {
 		UserDto userDto = createMockUserDto();
 		Mockito.when(userService.createUser(Mockito.any()))
-		.thenThrow(new DuplicateUserException("User is duplicate!"));
+		.thenThrow(new DuplicateUserException("User already exists!"));
 
 		MvcResult result = mockMvc.perform(post("/createUser")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -134,13 +134,13 @@ public class UserControllerTest {
 				.andExpect(status().isBadRequest())
 				.andReturn();
 		Exception exception = result.getResolvedException();
-		Assertions.assertTrue(exception.getMessage().equals("User is duplicate!"));
+		Assertions.assertTrue(exception.getMessage().equals("User already exists!"));
 	}
 
 	@Test
 	void createUser_whenEmailIsInvalid_thenReturnsInvalidEmailAddress() throws Exception {
 		Set<EmailDto> emails = new HashSet<>();
-		emails.add(new EmailDto(2, "mah.ebr@gmail", 1));
+		emails.add(new EmailDto(2, "mah.ebr@gmail"/* , 1 */));
 		UserDto userDto = new UserDto(1, "ebr", "mahnaz", emails, null);
 
 		mockMvc.perform(post("/createUser")
@@ -155,7 +155,7 @@ public class UserControllerTest {
 	@Test
 	void createUser_whenPhoneNumberIsInvalid_thenReturnsInvalidPhoneNumber() throws Exception {
 		Set<PhoneNumberDto> phoneNumbers = new HashSet<>();
-		phoneNumbers.add(new PhoneNumberDto(3, "98912frt", 1));
+		phoneNumbers.add(new PhoneNumberDto(3, "98912frt"));
 		UserDto userDto = new UserDto(1, "ebr", "mahnaz", null, phoneNumbers);
 
 		mockMvc.perform(post("/createUser")
@@ -201,7 +201,7 @@ public class UserControllerTest {
 
 		MvcResult mvcResult = mockMvc.perform(post("/addContactInfo")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(userDto)))
+				.content(objectMapper.writeValueAsString(createMockContactInfoRequest())))
 				.andExpect(status().isCreated())
 				.andReturn();
 		String result = mvcResult.getResponse().getContentAsString();
@@ -211,13 +211,12 @@ public class UserControllerTest {
 
 	@Test
 	public void addContactInfo_whenUserIdIsNotValid_thenThrowUserNotFoundException() throws Exception {
-		UserDto userDto = createMockUserDto();
 		Mockito.when(userService.addContactInfo(Mockito.any()))
 		.thenThrow(new UserNotFoundException("User not found"));
 
 		MvcResult mvcResult = mockMvc.perform(post("/addContactInfo")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(userDto)))
+				.content(objectMapper.writeValueAsString(createMockContactInfoRequest())))
 				.andExpect(status().isNotFound())
 				.andReturn();
 		Exception exception = mvcResult.getResolvedException();
@@ -232,7 +231,7 @@ public class UserControllerTest {
 
 		MvcResult mvcResult = mockMvc.perform(put("/updateContactInfo")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(userDto)))
+				.content(objectMapper.writeValueAsString(createMockContactInfoRequest())))
 				.andExpect(status().isOk())
 				.andReturn();
 		String result = mvcResult.getResponse().getContentAsString();
@@ -243,7 +242,7 @@ public class UserControllerTest {
 	@Test
 	void updateContactInfo_whenEmailIsInvalid_thenReturnsInvalidEmailAddress() throws Exception {
 		Set<EmailDto> emails = new HashSet<>();
-		EmailDto email = new EmailDto(2, "mah.ebr@gmail", 1);
+		EmailDto email = new EmailDto(2, "mah.ebr@gmail"/* , 1 */);
 		emails.add(email);
 
 		ContactInfoRequest contactInfoRequest = new ContactInfoRequest();
@@ -261,11 +260,23 @@ public class UserControllerTest {
 
 	private UserDto createMockUserDto() {
 		Set<EmailDto> emails = new HashSet<>();
-		emails.add(new EmailDto(2, "mah.ebr@gmail.com", 1));
+		emails.add(new EmailDto(2, "mah.ebr@gmail.com"));
 		Set<PhoneNumberDto> phoneNumbers = new HashSet<>();
-		phoneNumbers.add(new PhoneNumberDto(3, "989123456", 1));
+		phoneNumbers.add(new PhoneNumberDto(3, "989123456"));
 
 		UserDto userDto = new UserDto(1, "ebr", "mahnaz", emails, phoneNumbers);
 		return userDto;
 	}
+	
+	private ContactInfoRequest createMockContactInfoRequest() {
+		Set<EmailDto> emails = new HashSet<>();
+		EmailDto email = new EmailDto(2, "mah.ebr@gmail.com");
+		emails.add(email);
+
+		ContactInfoRequest contactInfoRequest = new ContactInfoRequest();
+		contactInfoRequest.setUserId(1);
+		contactInfoRequest.setEmail(email);
+		return contactInfoRequest;
+	}
+	
 }

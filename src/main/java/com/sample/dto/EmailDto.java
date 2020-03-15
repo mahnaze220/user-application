@@ -24,19 +24,14 @@ public class EmailDto {
 	private Integer id;
 	
 	@JsonProperty("mail")
-	@ApiModelProperty(notes = "mail")
+	@ApiModelProperty(notes = "mail", required = true)
 	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
 			message = "Invalid email address!")
 	private String mail;
 	
-	@JsonProperty("userId")
-	@ApiModelProperty(notes = "userId")
-	private Integer userId;
-
-	public EmailDto(Integer id, String mail, Integer userId) {
+	public EmailDto(Integer id, String mail) {
 		this(mail);
 		this.id = id;
-		this.userId = userId;
 	}
 	
 	public EmailDto(String mail) {

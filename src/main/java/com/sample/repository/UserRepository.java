@@ -21,7 +21,7 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query("select u from User u where u.firstName = :userName  or u.lastName = :userName")
     Optional<User> findByName(String userName);
     
-    @Query("SELECT COUNT(u) > 0 FROM User u WHERE u.firstName = :firstName  or u.lastName = :lastName")
+    @Query("SELECT COUNT(u) > 0 FROM User u WHERE u.firstName = :firstName and u.lastName = :lastName")
     boolean existByFullName(String firstName, String lastName);
     
 }

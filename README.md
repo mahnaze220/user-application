@@ -31,11 +31,8 @@ How to run:
 
   $ java -jar target/user-application-1.0.jar
 
-  application-url: http://localhost:8080
+  url: http://localhost:8080/swagger-ui.html
   
-  swagger-url: http://localhost:8080/swagger-ui.html
-  
-
 ---------------------------------------------------------  
 
 How to build and run docker image:

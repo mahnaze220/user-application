@@ -28,7 +28,7 @@ import com.sample.exception.UserServiceException.PhoneNumberNotFoundException;
 import com.sample.exception.UserServiceException.UserNotFoundException;
 
 /**
- * Exception handler for user services to customize status codes. 
+ * Exception handler for user services to customize response status codes. 
  *
  * @author Mahnaz
  * @Mar 13, 2020

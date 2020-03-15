@@ -24,22 +24,17 @@ public class PhoneNumberDto {
 	private Integer id;
 	
 	@JsonProperty("number")
-	@ApiModelProperty(notes = "number")
+	@ApiModelProperty(notes = "number", required = true)
 	@Pattern(regexp = "\\d+", message = "Invalid phone number!")
 	private String number;
 	
-	@JsonProperty("userId")
-	@ApiModelProperty(notes = "userId")
-	private Integer userId;
-
 	public PhoneNumberDto(String number) {
 		super();
 		this.number = number;
 	}
 	
-	public PhoneNumberDto(Integer id, String number, Integer userId) {
+	public PhoneNumberDto(Integer id, String number) {
 		this(number);
 		this.id = id;
-		this.userId = userId;
 	}
 }

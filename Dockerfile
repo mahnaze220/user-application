@@ -8,13 +8,10 @@
 #      $ sudo docker build -t user-application:1.0 .
 #      $ sudo docker run -d -p 8080:8080 -t user-application:1.0
 
-#
-# Pull base image
-# ---------------
-FROM maven:3.5.2-jdk-8-alpine AS MAVEN_BUILD
-
 # Configuration
 # ----------------------------------------------------------
+
+FROM maven:3.5.2-jdk-8-alpine AS MAVEN_BUILD
 
 COPY pom.xml /build/
 COPY src /build/src/

@@ -1,6 +1,7 @@
 package com.sample.dto;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -8,7 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * This DTO contains contact information of user for adding new one of updating existing 
+ * This DTO contains contact information of user to add new or update existing one.
  * phone number of email address.
  *
  * @author Mahnaz
@@ -28,7 +29,8 @@ public class ContactInfoRequest {
 	@Valid
 	private PhoneNumberDto phoneNumber;
 	
+	@NotNull(message = "User id must not be null")
 	@JsonProperty("userId")
-	@ApiModelProperty(notes = "userId")
+	@ApiModelProperty(notes = "userID", required = true)
 	private Integer userId;
 }

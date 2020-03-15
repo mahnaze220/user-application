@@ -72,7 +72,7 @@ public class UserController {
 	 */
 	@GetMapping(value = "/findUserByName")
 	@ApiOperation(value = "Find user by name", response = UserDto.class)
-	@ApiParam(name = "userId", value = "The first name or last name of the user to be searched", required = true)
+	@ApiParam(name = "userName", value = "The first name or last name of the user to be searched", required = true)
 	public ResponseEntity<UserDto> findUserByName(@RequestParam final String userName) {
 		return new ResponseEntity<>(userService.findUserByName(userName), HttpStatus.OK);
 	}

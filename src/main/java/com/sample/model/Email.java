@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
 /**
- * This entity contains email address information. 
+ * This entity holds persisted email address information of each user. 
  *
  * @author Mahnaz
  * @Mar 13, 2020
@@ -35,6 +35,9 @@ public class Email {
 	@NotNull
 	private String mail;
 	
+	/*
+	 * Each email address is unique and has only one owner
+	 */
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
 	@JoinColumn(name="user", referencedColumnName = "id", nullable = false)
 	private User user;

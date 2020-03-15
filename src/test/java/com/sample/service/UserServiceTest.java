@@ -48,7 +48,7 @@ public class UserServiceTest {
 
 	@MockBean
 	private EmailRepository emailRepository;
-
+	
 	@Test
 	public void findUserById_whenUserIdHasValidValue_thenReturnUserInfo() throws Exception {
 		Optional<User> user = createMockUser();
@@ -220,9 +220,9 @@ public class UserServiceTest {
 
 	private UserDto createMockUserDto() {
 		Set<EmailDto> emails = new HashSet<>();
-		emails.add(new EmailDto(2, "mah.ebr@gmail.com", 1));
+		emails.add(new EmailDto(2, "mah.ebr@gmail.com"));
 		Set<PhoneNumberDto> phoneNumbers = new HashSet<>();
-		phoneNumbers.add(new PhoneNumberDto(3, "989123456", 1));
+		phoneNumbers.add(new PhoneNumberDto(3, "989123456"));
 
 		UserDto userDto = new UserDto(1, "ebr", "mahnaz", emails, phoneNumbers);
 		return userDto;
@@ -238,7 +238,7 @@ public class UserServiceTest {
 	private ContactInfoRequest createMockEmail() {
 		ContactInfoRequest contactInfo = new ContactInfoRequest();
 		contactInfo.setUserId(1);
-		contactInfo.setEmail(new EmailDto(2, "m.e@gmail.com", 1));
+		contactInfo.setEmail(new EmailDto(2, "m.e@gmail.com"));
 		return contactInfo;
 	}
 }

@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
 /**
- * This entity contains phone number information. 
+ * This entity holds persisted phone number information of a user. 
  *
  * @author Mahnaz
  * @Mar 13, 2020
@@ -35,6 +35,9 @@ public class PhoneNumber {
 	@NotNull
 	private String number;
 
+	/*
+	 * Each phone number is unique and has only one owner
+	 */
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
 	@JoinColumn(name="user", referencedColumnName = "id", nullable = false)
 	private User user;
